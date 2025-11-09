@@ -19,4 +19,11 @@ fs.readFile('some.txt', 'utf-8', (err, data) => {
     })
 })
 
-
+fs.mkdir('./text-files', () => {
+    fs.writeFile('./text-files/file1.txt', 'hello', ()=>{})
+})
+// пока не удалишь все файлы, папка не удалится
+fs.unlink('./text-files/file1.txt', ()=>{
+    fs.rmdir('./text-files', ()=>{})
+})
+// fs.unlink('./some.txt', ()=>{})
