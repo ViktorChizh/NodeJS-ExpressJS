@@ -1,29 +1,25 @@
-const os = require('os')
-let res = os.platform()
-console.log(res)
+const http = require('http')
 
-const my_math = require('./my_math')
-
-console.log (my_math.add(5,6))
-console.log (my_math.minus(15,6))
-
-const fs = require('fs')
-//синхронные
-let result = fs.readFileSync('some.txt', 'utf-8')
-console.log('синхронный вывод: \n', result)
-fs.writeFileSync('some.txt', result + '\nHello')
-//асинхронные
-fs.readFile('some.txt', 'utf-8', (err, data) => {
-    fs.writeFile('some.txt', data + '\nHello World', (err, dt) => {
-        console.log('асинхронный вывод: \n', data)
-    })
+let server = http.createServer((req, res)=> {
+    // res.writeHead(200, {'Content-Type': 'text/plain charset=utf-8'}) // для текста
+    // res.end('Hello Node JS')
+    res.writeHead(200, {'Content-Type': 'text/html charset=utf-8'}) // для html
+    res.end(`<!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Node JS</title>
+        </head>
+        <body>
+            <h1>Hello Node</h1>
+        </body>
+        </html>`)
 })
 
-fs.mkdir('./text-files', () => {
-    fs.writeFile('./text-files/file1.txt', 'hello', ()=>{})
+const PORT = 3000
+const HOST = 'localhost' // '127.0.0.1' - это идентичные записи
+
+server.listen(PORT, HOST, () => {
+    console.log(`Сервер запущен: http://${HOST}:${PORT}`)
 })
-// пока не удалишь все файлы, папка не удалится
-fs.unlink('./text-files/file1.txt', ()=>{
-    fs.rmdir('./text-files', ()=>{})
-})
-// fs.unlink('./some.txt', ()=>{})
