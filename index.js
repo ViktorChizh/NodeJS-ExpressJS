@@ -28,7 +28,7 @@ app.get('/user/:username/:id', (req, res) => {
 app.post('/check-user', (req, res) => {
     let username = req.body.username
     if (username=='') return res.redirect('/')
-    else return res.redirect('user/'+ username + '/3')
+    else return res.redirect(`user/${username}/${Math.floor(Math.random() * 4) + 1}`)
 })
 
 const PORT = 3000
